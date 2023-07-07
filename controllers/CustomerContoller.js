@@ -271,6 +271,22 @@ exports.updateCustomerRegEntryById = async (req, res) => {
             },
         };
     }
+    
+    
+    else if (req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
+        updateData.$push = {
+            generatedInvoice: {
+                generatedCustomerId : req.body.generatedCustomerId, 
+                generatedTime : req.body.generatedTime,
+                generatedBill: req.body.generatedBill,
+                generatedToDate : req.body.generatedToDate,
+                generatedFromDate : req.body.generatedFromDate,
+                generatedRate : req.body.generatedRate,
+                generatedAyaAssigned : req.body.generatedAyaAssigned,
+            },
+        };
+    }
+
 
     try {
         const updatedEntry = await CustomerReg.findByIdAndUpdate(

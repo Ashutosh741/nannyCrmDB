@@ -266,16 +266,16 @@ const customerRegSchema = new mongoose.Schema({
             type : String,
         },
         generatedTime:{
-            type : Date
+            type : String
         },
         generatedBill:{
             type : String
         },
         generatedToDate:{
-            type : Date,
+            type : String,
         },
         generatedFromDate:{
-            type : Date,
+            type : String,
         },
         generatedRate:{
             type : String,
