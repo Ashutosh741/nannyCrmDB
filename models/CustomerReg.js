@@ -282,8 +282,11 @@ const customerRegSchema = new mongoose.Schema({
         },
         generatedAyaAssigned:{
             type : String,
-        }
-
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
         // type : String,
     }],
     attendService: {
@@ -407,6 +410,7 @@ const customerRegSchema = new mongoose.Schema({
 
 
 customerRegSchema.pre('save', async function (next) {
+    this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
     if (!this.customerCode) {
         try {
             // Get the last customer code from the database
