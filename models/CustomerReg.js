@@ -410,7 +410,7 @@ const customerRegSchema = new mongoose.Schema({
 
 
 customerRegSchema.pre('save', async function (next) {
-    this.generatedInvoice.sort((a, b) => a.createdAt - b.createdAt);
+    this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
     if (!this.customerCode) {
         try {
             // Get the last customer code from the database
