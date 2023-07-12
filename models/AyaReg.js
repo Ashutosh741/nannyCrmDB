@@ -14,6 +14,9 @@ const ayaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    rate :{
+        type : Number,
+    },
     workShift: {
         type: String,
         // enum: ['Day', 'Night', 'day-night'],
@@ -187,9 +190,9 @@ const ayaSchema = new mongoose.Schema({
             currentdate: {
                 type: String,
             },
-            paymentstatus: {
-                type: String,
-            }
+            // paymentstatus: {
+            //     type: String,
+            // }
         }
     ]
 
