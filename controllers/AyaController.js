@@ -3,6 +3,16 @@ const AyaReg = require('../models/AyaReg');
 
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const ObjectId = require('mongoose').Types.ObjectId;
+function isValidObjectId(id) {
+
+    if (ObjectId.isValid(id)) {
+        if ((String)(new ObjectId(id)) === id)
+            return true;
+        return false;
+    }
+    return false;
+}
 
 // GET /ayareg - Get all AyaReg entries
 exports.getAllAyaRegEntries = async (req, res) => {
@@ -89,19 +99,46 @@ exports.createAyaRegEntry = async (req, res) => {
 
 
 // GET /ayareg/:id - Get an AyaReg entry by ID
+
+
 exports.getAyaRegEntryById = async (req, res) => {
     try {
         const { id } = req.params;
-        const entry = await AyaReg.findById(id);
+        // console.log(id)
+        // let entry
+        if (isValidObjectId(id)) {
+            entry = await AyaReg.findOne({ _id: id });
+
+        } else {
+            entry = await AyaReg.findOne({ ayaCode: id });
+        }
+
         if (!entry) {
             return res.status(404).json({ error: 'Entry not found' });
         }
         // res.status(200).json(entry);
         res.status(200).json({ succes: true, count: entry.length, message: "Success", data: entry });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+// exports.getAyaRegEntryById = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const entry = await AyaReg.findById(id);
+//         if (!entry) {
+//             return res.status(404).json({ error: 'Entry not found' });
+//         }
+//         // res.status(200).json(entry);
+//         res.status(200).json({ succes: true, count: entry.length, message: "Success", data: entry });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// };
 
 // PUT /ayareg/:id - Update an AyaReg entry by ID
 // exports.updateAyaRegEntryById = async (req, res) => {

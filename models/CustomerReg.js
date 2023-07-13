@@ -399,16 +399,6 @@ const customerRegSchema = new mongoose.Schema({
 
 
 
-
-
-
-
-
-
-
-
-
-
 customerRegSchema.pre('save', async function (next) {
     this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
     if (!this.customerCode) {

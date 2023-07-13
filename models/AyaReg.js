@@ -139,6 +139,9 @@ const ayaSchema = new mongoose.Schema({
         assignedCustomerId :{
             type : String
         },
+        assignedCustomerName:{
+            type : String,
+        },
         assignedCustomerToDate: {
             type  :Date
         },
@@ -146,6 +149,9 @@ const ayaSchema = new mongoose.Schema({
             type : Date
         },
         assignedCustomerRate:{
+            type : String,
+        },
+        assignedCustomerShift:{
             type : String,
         }
     }],
@@ -190,9 +196,9 @@ const ayaSchema = new mongoose.Schema({
             currentdate: {
                 type: String,
             },
-            // paymentstatus: {
-            //     type: String,
-            // }
+            paymentstatus: {
+                type: String,
+            }
         }
     ]
 
@@ -220,10 +226,12 @@ const ayaSchema = new mongoose.Schema({
 
 ayaSchema.pre('save', function (next) {
     if (!this.ayaCode) {
-        const fullName = this.name.toLowerCase();
+        // const fullName = this.name.toLowerCase();
         const randomNumbers = Math.floor(Math.random() * 900) + 100;
 
-        this.ayaCode = `${fullName}${randomNumbers}`;
+        // this.ayaCode = `${fullName}${randomNumbers}`;
+        this.ayaCode = `${randomNumbers}`;
+
     }
     next();
 });

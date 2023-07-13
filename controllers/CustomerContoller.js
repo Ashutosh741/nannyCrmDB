@@ -121,7 +121,7 @@ exports.getCustomerRegEntryById = async (req, res) => {
     try {
         const { id } = req.params;
         // console.log(id)
-        let entry
+        // let entry
         if (isValidObjectId(id)) {
             entry = await CustomerReg.findOne({ _id: id });
 
