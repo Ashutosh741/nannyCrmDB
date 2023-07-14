@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const ayaSchema = new mongoose.Schema({
     ayaCode: {
         type: String,
@@ -136,24 +137,34 @@ const ayaSchema = new mongoose.Schema({
         default: "Not Assign"
     },
     assignedCustomerDetails:[{
-        assignedCustomerId :{
+        assignedCustomerCode :{
             type : String
         },
         assignedCustomerName:{
             type : String,
         },
-        assignedCustomerToDate: {
-            type  :Date
-        },
         assignedCustomerFromDate :{
-            type : Date
+            type : String,
+        },
+        assignedCustomerToDate: {
+            type  :String,
+        },
+        assignedCustomerReason: {
+            type  : String,
         },
         assignedCustomerRate:{
             type : String,
         },
-        assignedCustomerShift:{
+        assignedCustomerShift:{ 
             type : String,
-        }
+        },
+        assignedCustomerPurpose:{
+            type : String,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
     }],
     file: {
         type: String,
@@ -173,32 +184,37 @@ const ayaSchema = new mongoose.Schema({
     },
     ayapayment: [
         {
-            customerbill: {
+            ayaBill: {
                 type: String,
                 default: 0
-            },
-            paymentstatus: {
-                type: String,
-                default: "New"
             },
             ayapaid: {
                 type: String,
                 default: 0
             },
-            profit: {
-                type: String,
-                default: 0
+            FromDate : {
+                type : String,
             },
-            month: {
-                type: String,
-                default: "new User"
+            ToDate : {
+                type : String,
             },
-            currentdate: {
-                type: String,
+            Rate : {
+                type : String
+            },
+            Purpose : {
+                type : String
+            },
+            Shift : {
+                type : String
             },
             paymentstatus: {
                 type: String,
-            }
+                default: "Not Pending"
+            },
+            balance: {
+                type: String,
+                default: 0
+            },
         }
     ]
 

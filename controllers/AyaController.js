@@ -200,6 +200,20 @@ exports.updateAyaRegEntryById = async (req, res) => {
             },
         };
     }
+    else if(req.body.assignedCustomerPurpose || req.body.assignedCustomerShift || req.body.assignedCustomerRate || req.body.assignedCustomerReason ||  req.body.assignedCustomerToDate || req.body.assignedCustomerFromDate || req.body.assignedCustomerName || req.body.assignedCustomerCode){
+        updateData.$push = {
+        assignedCustomerDetails:{
+            assignedCustomerCode : req.body.assignedCustomerCode,
+            assignedCustomerName : req.body.assignedCustomerName, 
+            assignedCustomerFromDate : req.body.assignedCustomerFromDate, 
+            assignedCustomerToDate : req.body.assignedCustomerToDate, 
+            assignedCustomerReason : req.body.assignedCustomerReason,
+            assignedCustomerRate  : req.body.assignedCustomerRate, 
+            assignedCustomerShift : req.body.assignedCustomerShift, 
+            assignedCustomerPurpose : req.body.assignedCustomerPurpose, 
+        },
+        }
+    }
 
     try {
         const updatedEntry = await AyaReg.findByIdAndUpdate(

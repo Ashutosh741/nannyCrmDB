@@ -283,6 +283,9 @@ const customerRegSchema = new mongoose.Schema({
         generatedAyaAssigned:{
             type : String,
         },
+        generatedAyaPurpose:{
+            type : String,
+        },
         createdAt: {
             type: Date,
             default: Date.now,
@@ -344,14 +347,33 @@ const customerRegSchema = new mongoose.Schema({
         assignedAyaCode : {
             type : String,
         },
+        assignedAyaName : {
+            type : String
+        },
         assignedAyaFromDate : {
             type : String,
         },
         assignedAyaToDate : {
             type : String,
         },
+        assignedAyaReason : {
+            type : String
+        },
         assignedAyaRate : {
             type : String
+        },
+        assignedAyaPurpose : {
+            type : String
+        },
+        assignedAyaShift : {
+            type : String
+        },
+        assignedAyaRate : {
+            type : String
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         },
         
     }],
@@ -376,21 +398,32 @@ const customerRegSchema = new mongoose.Schema({
                 type: String,
                 default: 0
             },
+            FromDate : {
+                type : String,
+            },
+            ToDate : {
+                type : String,
+            },
+            Rate : {
+                type : String
+            },
+            Purpose : {
+                type : String
+            },
+            Shift : {
+                type : String
+            },
             paymentstatus: {
                 type: String,
                 default: "Not Pending"
-            },
-            month: {
-                type: String,
-                default: "not Selected"
             },
             balance: {
                 type: String,
                 default: 0
             },
-            currentdate: {
-                type: String
-            },
+            // securityMoney: {
+            //     type: String
+            // },
         },
         
     ]
@@ -399,34 +432,71 @@ const customerRegSchema = new mongoose.Schema({
 
 
 
+// customerRegSchema.pre('save', async function (next) {
+//     this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
+//     this.assignedAyaDetails.sort((a, b) => a.createdAt - b.createdAt);
+
+//     if (!this.customerCode) {
+//         try {
+//             // Get the last customer code from the database
+//             const lastCustomer = await mongoose.model('Customer', customerRegSchema)
+//                 .findOne({}, { customerCode: 1 }, { sort: { createdAt: -1 } })
+//                 .lean()
+//                 .exec();
+
+//             let nextCustomerCode;
+//             if (lastCustomer && lastCustomer.customerCode) {
+//                 const lastCodeNumber = parseInt(lastCustomer.customerCode.slice(-3));
+//                 nextCustomerCode = (lastCodeNumber + 1).toString().padStart(3, '0');
+//             } else {
+//                 nextCustomerCode = '001';
+//             }
+
+//             this.customerCode = `1${nextCustomerCode}`;
+//         } catch (error) {
+//             console.error('Error generating customer code:', error);
+//         }
+//     }
+//     next();
+// });
+
+customerRegSchema.pre('save', function(next) {
+    this.assignedAyaDetails.sort((a, b) => b.createdAt - a.createdAt);
+    next();
+  });
+  
+
+
 customerRegSchema.pre('save', async function (next) {
     this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
+    
+    // Sort assignedAyaDetails array in descending order based on createdAt
+    this.assignedAyaDetails.sort((a, b) => b.createdAt - a.createdAt);
+  
     if (!this.customerCode) {
-        try {
-            // Get the last customer code from the database
-            const lastCustomer = await mongoose.model('Customer', customerRegSchema)
-                .findOne({}, { customerCode: 1 }, { sort: { createdAt: -1 } })
-                .lean()
-                .exec();
-
-            let nextCustomerCode;
-            if (lastCustomer && lastCustomer.customerCode) {
-                const lastCodeNumber = parseInt(lastCustomer.customerCode.slice(-3));
-                nextCustomerCode = (lastCodeNumber + 1).toString().padStart(3, '0');
-            } else {
-                nextCustomerCode = '001';
-            }
-
-            this.customerCode = `1${nextCustomerCode}`;
-        } catch (error) {
-            console.error('Error generating customer code:', error);
+      try {
+        // Get the last customer code from the database
+        const lastCustomer = await mongoose.model('Customer', customerRegSchema)
+          .findOne({}, { customerCode: 1 }, { sort: { createdAt: -1 } })
+          .lean()
+          .exec();
+  
+        let nextCustomerCode;
+        if (lastCustomer && lastCustomer.customerCode) {
+          const lastCodeNumber = parseInt(lastCustomer.customerCode.slice(-3));
+          nextCustomerCode = (lastCodeNumber + 1).toString().padStart(3, '0');
+        } else {
+          nextCustomerCode = '001';
         }
+  
+        this.customerCode = `1${nextCustomerCode}`;
+      } catch (error) {
+        console.error('Error generating customer code:', error);
+      }
     }
     next();
-});
-
-
-
+  });
+  
 
 
 module.exports = mongoose.model('Customer', customerRegSchema)

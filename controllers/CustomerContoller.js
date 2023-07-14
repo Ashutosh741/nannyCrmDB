@@ -273,7 +273,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
     }
     
     
-    else if (req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
+    else if (req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
         updateData.$push = {
             generatedInvoice: {
                 generatedCustomerId : req.body.generatedCustomerId, 
@@ -283,8 +283,24 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 generatedFromDate : req.body.generatedFromDate,
                 generatedRate : req.body.generatedRate,
                 generatedAyaAssigned : req.body.generatedAyaAssigned,
+                generatedAyaPurpose : req.body.generatedAyaPurpose,
             },
         };
+    }
+
+    else if(req.body.assignedAyaPurpose || req.body.assignedAyaShift || req.body.assignedAyaRate || req.body.assignedAyaReason ||  req.body.assignedAyaToDate || req.body.assignedAyaFromDate || req.body.assignedAyaName || req.body.assignedAyaCode){
+        updateData.$push = {
+        assignedAyaDetails:{
+            assignedAyaCode : req.body.assignedAyaCode,
+            assignedAyaName : req.body.assignedAyaName, 
+            assignedAyaFromDate : req.body.assignedAyaFromDate, 
+            assignedAyaToDate : req.body.assignedAyaToDate, 
+            assignedAyaReason : req.body.assignedAyaReason,
+            assignedAyaRate  : req.body.assignedAyaRate, 
+            assignedAyaShift : req.body.assignedAyaShift, 
+            assignedAyaPurpose : req.body.assignedAyaPurpose, 
+        },
+        }
     }
 
 
