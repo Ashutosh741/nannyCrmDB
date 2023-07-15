@@ -185,18 +185,20 @@ exports.getAyaRegEntryById = async (req, res) => {
 exports.updateAyaRegEntryById = async (req, res) => {
     const id = req.params.id;
     const updateData = { $set: req.body };
-
-    if (req.body.customerbill || req.body.paymentstatus || req.body.ayapaid || req.body.profit || req.body.month || req.body.balance || req.body.currentdate) {
+    if ( req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentCustomerPurpose||req.body.paymentCustomerAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
         updateData.$push = {
-            ayapayment: {
-                customerbill: req.body.customerbill,
+            ayaPaymentDetails: {
+                paymentBill: req.body.paymentBill,
+                paymentAmountReceived: req.body.paymentAmountReceived,
+                paymentFromDate: req.body.paymentFromDate,
+                paymentToDate: req.body.paymentToDate,
+                paymentCustomerAssigned: req.body.paymentCustomerAssigned,
+                paymentRate: req.body.paymentRate,
+                paymentCustomerPurpose: req.body.paymentCustomerPurpose,
+                paymentLeaveTaken: req.body.paymentLeaveTaken,
+                paymentWorkingDays: req.body.paymentWorkingDays,
                 paymentstatus: req.body.paymentstatus,
-                ayapaid: req.body.ayapaid,
-                profit: req.body.profit,
-                month: req.body.month,
-                paymentstatus: req.body.paymentstatus,
-                balance: req.body.balance,
-                currentdate: req.body.currentdate
+                paymentBalance : req.body.paymentBalance,
             },
         };
     }
@@ -213,6 +215,23 @@ exports.updateAyaRegEntryById = async (req, res) => {
             assignedCustomerPurpose : req.body.assignedCustomerPurpose, 
         },
         }
+    }
+    else if ( req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountPaid || req.body.generatedCustomerPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedAyaId) {
+        updateData.$push = {
+            ayaGeneratedInvoice: {
+                generatedAyaId : req.body.generatedAyaId, 
+                generatedTime : req.body.generatedTime,
+                generatedBill: req.body.generatedBill,
+                generatedToDate : req.body.generatedToDate,
+                generatedFromDate : req.body.generatedFromDate,
+                generatedRate : req.body.generatedRate,
+                generatedCustomerAssigned : req.body.generatedCustomerAssigned,
+                generatedCustomerPurpose : req.body.generatedCustomerPurpose,
+                generatedAmountReceived : req.body.generatedAmountPaid,
+                generatedWorkingDays : req.body.generatedWorkingDays,
+                generatedLeaveTaken : req.body.generatedLeaveTaken,
+            },
+        };
     }
 
     try {

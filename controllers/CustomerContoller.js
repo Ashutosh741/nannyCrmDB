@@ -259,23 +259,29 @@ exports.updateCustomerRegEntryById = async (req, res) => {
     const id = req.params.id;
     const updateData = { $set: req.body };
 
-    if (req.body.customerbill || req.body.amount_received || req.body.month || req.body.paymentstatus || req.body.balance || req.body.currentdate) {
+    if ( req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentAyaPurpose||req.body.paymentAyaAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
         updateData.$push = {
-            customerpayment: {
-                customerbill: req.body.customerbill,
-                amount_received: req.body.amount_received,
-                month: req.body.month,
+            customerPaymentDetails: {
+                paymentBill: req.body.paymentBill,
+                paymentAmountReceived: req.body.paymentAmountReceived,
+                paymentFromDate: req.body.paymentFromDate,
+                paymentToDate: req.body.paymentToDate,
+                paymentAyaAssigned: req.body.paymentAyaAssigned,
+                paymentRate: req.body.paymentRate,
+                paymentAyaPurpose: req.body.paymentAyaPurpose,
+                paymentLeaveTaken: req.body.paymentLeaveTaken,
+                paymentWorkingDays: req.body.paymentWorkingDays,
                 paymentstatus: req.body.paymentstatus,
-                balance: req.body.balance,
-                currentdate: req.body.currentdate
+                paymentBalance : req.body.paymentBalance,
+
             },
         };
     }
     
     
-    else if (req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
+    else if ( req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountReceived || req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
         updateData.$push = {
-            generatedInvoice: {
+            customerGeneratedInvoice: {
                 generatedCustomerId : req.body.generatedCustomerId, 
                 generatedTime : req.body.generatedTime,
                 generatedBill: req.body.generatedBill,
@@ -284,6 +290,9 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 generatedRate : req.body.generatedRate,
                 generatedAyaAssigned : req.body.generatedAyaAssigned,
                 generatedAyaPurpose : req.body.generatedAyaPurpose,
+                generatedAmountReceived : req.body.generatedAmountReceived,
+                generatedWorkingDays : req.body.generatedWorkingDays,
+                generatedLeaveTaken : req.body.generatedLeaveTaken,
             },
         };
     }

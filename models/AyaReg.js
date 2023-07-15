@@ -85,6 +85,46 @@ const ayaSchema = new mongoose.Schema({
         // enum: ['Male', 'Female'],
         default: ''
     },
+    ayaGeneratedInvoice : [{
+        generatedAyaId:{
+            type : String,
+        },
+        generatedTime:{
+            type : String
+        },
+        generatedBill:{
+            type : String
+        },
+        generatedToDate:{
+            type : String,
+        },
+        generatedFromDate:{
+            type : String,
+        },
+        generatedRate:{
+            type : String,
+        },
+        generatedCustomerAssigned:{
+            type : String,
+        },
+        generatedCustomerPurpose:{
+            type : String,
+        },
+        generatedAmountPaid:{
+            type : String,
+        },
+        generatedWorkingDays:{
+            type : String,
+        },
+        generatedLeaveTaken:{
+            type : String,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+        // type : String,
+    }],
     age: {
         type: Number
     },
@@ -182,40 +222,48 @@ const ayaSchema = new mongoose.Schema({
         type: String,
         default: 0
     },
-    ayapayment: [
+    ayaPaymentDetails: [
         {
-            ayaBill: {
-                type: String,
-                default: 0
-            },
-            ayapaid: {
-                type: String,
-                default: 0
-            },
-            FromDate : {
-                type : String,
-            },
-            ToDate : {
-                type : String,
-            },
-            Rate : {
-                type : String
-            },
-            Purpose : {
-                type : String
-            },
-            Shift : {
-                type : String
-            },
-            paymentstatus: {
-                type: String,
-                default: "Not Pending"
-            },
-            balance: {
-                type: String,
-                default: 0
-            },
-        }
+        paymentBill:{
+            type : String
+        },
+        paymentAmountReceived:{
+            type : String,
+        },
+        paymentFromDate:{
+            type : String,
+        },
+        paymentToDate:{
+            type : String,
+        },
+        paymentRate:{
+            type : String,
+        },
+        paymentCustomerAssigned:{
+            type : String,
+        },
+        paymentCustomerPurpose:{
+            type : String,
+        },
+        paymentWorkingDays:{
+            type : String,
+        },
+        paymentLeaveTaken:{
+            type : String,
+        },
+        paymentstatus: {
+            type: String,
+            default: "Not Pending"
+        },
+        paymentalance: {
+            type: String,
+            default: 0
+        },
+        // securityMoney: {
+        //     type: String
+        // },
+        },
+        
     ]
 
 
