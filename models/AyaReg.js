@@ -322,19 +322,48 @@ const ayaSchema = new mongoose.Schema({
 
 
 
-ayaSchema.pre('save', function (next) {
+// ayaSchema.pre('save', function (next) {
+//     if (!this.ayaCode) {
+//         // const fullName = this.name.toLowerCase();
+//         const randomNumbers = Math.floor(Math.random() * 900) + 100;
+
+//         // this.ayaCode = `${fullName}${randomNumbers}`;
+//         this.ayaCode = `${randomNumbers}`;
+
+//     }
+//     next();
+// });
+
+ayaSchema.pre('save', async function (next) {
+    // this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
+    
+    // Sort assignedAyaDetails array in descending order based on createdAt
+    // this.assignedAyaDetails.sort((a, b) => b.createdAt - a.createdAt);
+  
     if (!this.ayaCode) {
-        // const fullName = this.name.toLowerCase();
-        const randomNumbers = Math.floor(Math.random() * 900) + 100;
-
-        // this.ayaCode = `${fullName}${randomNumbers}`;
-        this.ayaCode = `${randomNumbers}`;
-
+      try {
+        // Get the last customer code from the database
+        const lastAya = await mongoose.model('Aya', ayaSchema)
+          .findOne({}, { ayaCode: 1 }, { sort: { createdAt: -1 } })
+          .lean()
+          .exec();
+  
+        let nextAyaCode;
+        if (lastAya && lastAya.ayaCode) {
+          const lastCodeNumber = parseInt(lastAya.ayaCode.slice(-3));
+          nextAyaCode = (lastCodeNumber + 1).toString().padStart(3, '0');
+        } else {
+          nextAyaCode = '001';
+        }
+  
+        this.ayaCode = `A1${nextAyaCode}`;
+      } catch (error) {
+        console.error('Error generating Aya code:', error);
+      }
     }
     next();
-});
-
-
+  });
+  
 
 
 module.exports = mongoose.model("Aya", ayaSchema);

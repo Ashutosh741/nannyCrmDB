@@ -351,7 +351,7 @@ customerRegSchema.pre('save', async function (next) {
           nextCustomerCode = '001';
         }
   
-        this.customerCode = `1${nextCustomerCode}`;
+        this.customerCode = `C1${nextCustomerCode}`;
       } catch (error) {
         console.error('Error generating customer code:', error);
       }
