@@ -1,175 +1,5 @@
 const mongoose = require('mongoose')
 
-// const customerRegSchema = new mongoose.Schema({
-//     customerCode: {
-//         type: String,
-
-//         unique: true
-//     },
-//     name: {
-//         type: String,
-
-//     },
-//     guardianName: {
-//         type: String,
-//     },
-//     booking: {
-//         type: Date,
-
-//     },
-//     dateRequirement: {
-//         type: Date,
-
-//     },
-//     requirementpurpose: {
-//         type: String
-//     },
-//     securityAmount: {
-//         type: String
-//     },
-//     closingDate: {
-//         type: Date,
-
-//     },
-//     securityAdjustment: {
-//         type: String
-//     },
-//     presentAddress: {
-//         type: String
-//     },
-//     vill: {
-//         type: String
-//     },
-//     street: {
-//         type: String
-//     },
-//     landmark: {
-//         type: String
-//     },
-//     post: {
-//         type: String
-//     },
-//     district: {
-//         type: String
-//     },
-//     state: {
-//         type: String
-//     },
-//     pin: {
-//         type: String
-//     },
-//     permanentAddress: {
-//         type: String
-//     },
-//     permanentVill: {
-//         type: String
-//     },
-//     permanentStreet: {
-//         type: String
-//     },
-//     permanentLandmark: {
-//         type: String
-//     },
-//     permanentPost: {
-//         type: String
-//     },
-//     permanentDistrict: {
-//         type: String
-//     },
-//     permanentState: {
-//         type: String
-//     },
-//     permanentPin: {
-//         type: String
-//     },
-//     dateOfBirth: {
-//         type: Date,
-//     },
-//     gender: {
-//         type: String,
-//         // enum: ['Male', 'Female'],
-//         default: ''
-//     },
-//     attendService: {
-//         type: String,
-//     },
-//     forService: {
-//         type: String,
-//     },
-//     age: {
-//         type: Number
-//     },
-//     nationality: {
-//         type: String
-//     },
-//     contactNumber: {
-//         type: String
-//     },
-//     alternativeNumber: {
-//         type: String
-//     },
-//     religion: {
-//         type: String
-//     },
-//     marriageStatus: {
-//         type: String,
-//         // enum: ['Single', 'Married', 'Widow'],
-//         default: ''
-//     },
-//     idCardType: {
-//         type: String,
-//         // enum: ['aadhar-card', 'voter-idcard', 'pan-card', 'driving-license'],
-//         default: ''
-//     },
-//     idCardNumber: {
-//         type: String
-//     },
-//     idProofImage: {
-//         type: String,
-//     },
-//     statusofCustomer: {
-//         type: String
-//     },
-//     customerRemark: {
-//         type: String
-//     },
-//     customerSpeak: {
-//         type: String,
-//         default: ""
-//     },
-//     assign: {
-//         type: String,
-//         default: "Not Assign"
-//     },
-//     balance: {
-//         type: String,
-//         default: 0
-//     },
-//     status: {
-//         type: String,
-//         default: "Active User"
-//     },
-
-//     customerbill: {
-//         type: String,
-//         default: 0
-//     },
-//     amount_received: {
-//         type: String,
-//         default: 0
-//     },
-//     file: {
-//         type: String
-//     },
-//     customerbill: {
-//         type: String,
-//         default: 0
-//     }
-
-// }, { timestamps: true })
-
-
-
 const customerRegSchema = new mongoose.Schema({
     customerCode: {
         type: String,
@@ -184,11 +14,11 @@ const customerRegSchema = new mongoose.Schema({
         type: String,
     },
     booking: {
-        type: Date,
+        type: String,
 
     },
     dateRequirement: {
-        type: Date,
+        type: String,
 
     },
     requirementpurpose: {
@@ -199,7 +29,7 @@ const customerRegSchema = new mongoose.Schema({
         default: 0
     },
     closingDate: {
-        type: Date,
+        type: String,
 
     },
     securityAdjustment: {
@@ -355,9 +185,14 @@ const customerRegSchema = new mongoose.Schema({
     assignedAyaDetails:[{
         assignedAyaCode : {
             type : String,
+            default: ''
+
         },
         assignedAyaName : {
-            type : String
+            type : String,
+            default: ''
+
+
         },
         assignedAyaFromDate : {
             type : String,
@@ -366,16 +201,24 @@ const customerRegSchema = new mongoose.Schema({
             type : String,
         },
         assignedAyaReason : {
-            type : String
+            type : String,
+            default: ''
+
         },
         assignedAyaRate : {
-            type : String
+            type : String,
+            default: ''
+
         },
         assignedAyaPurpose : {
-            type : String
+            type : String,
+            default: ''
+
         },
         assignedAyaShift : {
-            type : String
+            type : String,
+            default: ''
+
         },
         createdAt: {
             type: Date,
@@ -394,13 +237,17 @@ const customerRegSchema = new mongoose.Schema({
         type: String,
         default: 0
     },
+    pendingAmount: {
+        type: Number,
+        default: 0
+    },
     customerPaymentDetails: [
         {
         paymentBill:{
-            type : String
+            type : Number
         },
         paymentAmountReceived:{
-            type : String,
+            type : Number,
         },
         paymentFromDate:{
             type : String,
@@ -479,10 +326,10 @@ customerRegSchema.pre('save', function(next) {
 
 
 customerRegSchema.pre('save', async function (next) {
-    this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
+    // this.generatedInvoice.sort((a, b) => b.createdAt - a.createdAt);
     
     // Sort assignedAyaDetails array in descending order based on createdAt
-    this.assignedAyaDetails.sort((a, b) => b.createdAt - a.createdAt);
+    // this.assignedAyaDetails.sort((a, b) => b.createdAt - a.createdAt);
   
     if (!this.customerCode) {
       try {

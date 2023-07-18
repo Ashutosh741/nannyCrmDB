@@ -49,6 +49,32 @@ exports.getAllCustomerRegEntries = async (req, res) => {
 
 // latest one which we comment
 
+// exports.createCustomerRegEntry = async (req, res) => {
+
+//     try {
+
+//         let item = req.body
+//         if (req.files && req.files.file && req.files.file.length > 0) {
+//             item = { ...item, ['file']: req.files.file[0].path }
+//         }
+
+//         const newCustomer = new CustomerReg(item)
+//         const savedCustomer = await newCustomer.save()
+
+
+
+//         res.status(200).json({ success: true, message: 'Successfully created', data: savedCustomer })
+//     } catch (err) {
+//         if (err.code === 11000) {
+//             res.status(400).json({ success: false, message: 'URL already exists' })
+//         } else {
+//             res.status(500).json({ success: false, message: 'Failed to create. Please try again later.' })
+//             console.log(err)
+//         }
+//     }
+// }
+
+
 exports.createCustomerRegEntry = async (req, res) => {
 
     try {
@@ -73,7 +99,6 @@ exports.createCustomerRegEntry = async (req, res) => {
         }
     }
 }
-
 
 
 // exports.createCustomerRegEntry = async (req, res) => {
@@ -273,6 +298,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 paymentWorkingDays: req.body.paymentWorkingDays,
                 paymentstatus: req.body.paymentstatus,
                 paymentBalance : req.body.paymentBalance,
+                // paymentPendingAmount : req.body.paymentPendingAmount,
 
             },
         };
@@ -311,7 +337,11 @@ exports.updateCustomerRegEntryById = async (req, res) => {
         },
         }
     }
-
+    else if( req.body.pendingAmount ){
+        updateData.$push = {
+            pendingAmount : req.body.pendingAmount
+        }
+    }
 
     try {
         const updatedEntry = await CustomerReg.findByIdAndUpdate(

@@ -88,6 +88,7 @@ const ayaSchema = new mongoose.Schema({
     ayaGeneratedInvoice : [{
         generatedAyaId:{
             type : String,
+            default: ''
         },
         generatedTime:{
             type : String
@@ -106,18 +107,28 @@ const ayaSchema = new mongoose.Schema({
         },
         generatedCustomerAssigned:{
             type : String,
+            default: ''
+            
         },
         generatedCustomerPurpose:{
             type : String,
+            default: ''
+
         },
         generatedAmountPaid:{
             type : String,
+            default: ''
+
         },
         generatedWorkingDays:{
             type : String,
+            default: ''
+
         },
         generatedLeaveTaken:{
             type : String,
+            default: ''
+
         },
         createdAt: {
             type: Date,
@@ -178,28 +189,44 @@ const ayaSchema = new mongoose.Schema({
     },
     assignedCustomerDetails:[{
         assignedCustomerCode :{
-            type : String
+            type : String,
+            default: ''
+
         },
         assignedCustomerName:{
             type : String,
+            default: ''
+
         },
         assignedCustomerFromDate :{
             type : String,
+            default: ''
+
         },
         assignedCustomerToDate: {
             type  :String,
+            default: ''
+
         },
         assignedCustomerReason: {
             type  : String,
+            default: ''
+
         },
         assignedCustomerRate:{
             type : String,
+            default: ''
+
         },
         assignedCustomerShift:{ 
             type : String,
+            default: ''
+
         },
         assignedCustomerPurpose:{
             type : String,
+            default: ''
+
         },
         createdAt: {
             type: Date,
@@ -222,14 +249,21 @@ const ayaSchema = new mongoose.Schema({
         type: String,
         default: 0
     },
+    pendingAmount: {
+        type: Number,
+        default: 0
+    },
     ayaPaymentDetails: [
         {
         paymentBill:{
-            type : String
+            type : Number
         },
         paymentAmountReceived:{
-            type : String,
+            type : Number,
         },
+        // paymentPendingAmount:{
+        //     type : String,
+        // },
         paymentFromDate:{
             type : String,
         },
@@ -255,7 +289,7 @@ const ayaSchema = new mongoose.Schema({
             type: String,
             default: "Not Pending"
         },
-        paymentalance: {
+        paymentBalance: {
             type: String,
             default: 0
         },
