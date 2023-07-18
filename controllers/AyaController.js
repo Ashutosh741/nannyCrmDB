@@ -185,7 +185,7 @@ exports.getAyaRegEntryById = async (req, res) => {
 exports.updateAyaRegEntryById = async (req, res) => {
     const id = req.params.id;
     const updateData = { $set: req.body };
-    if (req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentCustomerPurpose||req.body.paymentCustomerAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
+    if (req.body.paymentPendingAmount || req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentCustomerPurpose||req.body.paymentCustomerAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
         updateData.$push = {
             ayaPaymentDetails: {
                 paymentBill: req.body.paymentBill,
@@ -200,7 +200,7 @@ exports.updateAyaRegEntryById = async (req, res) => {
                 paymentstatus: req.body.paymentstatus,
                 paymentBalance : req.body.paymentBalance,
                 // paymentPendingAmount
-                // paymentPendingAmount : req.body.paymentPendingAmount,
+                paymentPendingAmount : req.body.paymentPendingAmount,
 
             },
         };

@@ -284,7 +284,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
     const id = req.params.id;
     const updateData = { $set: req.body };
 
-    if ( req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentAyaPurpose||req.body.paymentAyaAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
+    if (req.body.paymentPendingAmount ||  req.body.paymentBalance || req.body.paymentstatus || req.body.paymentLeaveTaken || req.body.paymentWorkingDays || req.body.paymentAmountReceived ||  req.body.paymentAyaPurpose||req.body.paymentAyaAssigned || req.body.paymentBill || req.body.paymentToDate || req.body.paymentFromDate || req.body.paymentRate) {
         updateData.$push = {
             customerPaymentDetails: {
                 paymentBill: req.body.paymentBill,
@@ -298,7 +298,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 paymentWorkingDays: req.body.paymentWorkingDays,
                 paymentstatus: req.body.paymentstatus,
                 paymentBalance : req.body.paymentBalance,
-                // paymentPendingAmount : req.body.paymentPendingAmount,
+                paymentPendingAmount : req.body.paymentPendingAmount,
 
             },
         };
@@ -337,9 +337,9 @@ exports.updateCustomerRegEntryById = async (req, res) => {
         },
         }
     }
-    else if( req.body.pendingAmount ){
+    else if( req.body.totalPendingAmount ){
         updateData.$push = {
-            pendingAmount : req.body.pendingAmount
+            totalPendingAmount : req.body.totalPendingAmount
         }
     }
 

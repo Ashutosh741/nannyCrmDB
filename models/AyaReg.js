@@ -261,9 +261,9 @@ const ayaSchema = new mongoose.Schema({
         paymentAmountReceived:{
             type : Number,
         },
-        // paymentPendingAmount:{
-        //     type : String,
-        // },
+        paymentPendingAmount:{
+            type : String,
+        },
         paymentFromDate:{
             type : String,
         },

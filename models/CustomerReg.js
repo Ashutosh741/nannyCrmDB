@@ -99,7 +99,7 @@ const customerRegSchema = new mongoose.Schema({
             type : String
         },
         generatedBill:{
-            type : String
+            type : Number
         },
         generatedToDate:{
             type : String,
@@ -237,7 +237,7 @@ const customerRegSchema = new mongoose.Schema({
         type: String,
         default: 0
     },
-    pendingAmount: {
+    totalPendingAmount: {
         type: Number,
         default: 0
     },
@@ -247,6 +247,10 @@ const customerRegSchema = new mongoose.Schema({
             type : Number
         },
         paymentAmountReceived:{
+            type : Number,
+            default : 0
+        },
+        paymentPendingAmount:{
             type : Number,
         },
         paymentFromDate:{
