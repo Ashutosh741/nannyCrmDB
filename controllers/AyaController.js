@@ -1,6 +1,5 @@
 
 const AyaReg = require('../models/AyaReg');
-
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -71,7 +70,15 @@ exports.createAyaRegEntry = async (req, res) => {
         if (req.files && req.files.file && req.files.file.length > 0) {
             item = { ...item, ['file']: req.files.file[0].path }
         }
-
+        if (req.files && req.files.aadharCardImage && req.files.aadharCardImage.length > 0) {
+            item = { ...item, ['aadharCardImage']: req.files.aadharCardImage[0].path};
+        }
+    
+        // Check if ID Card Images were uploaded
+        if (req.files && req.files.idCardImage && req.files.idCardImage.length > 0) {
+            item = { ...item, ['idCardImage']: req.files.idCardImage[0].path };
+        }
+       
         const newAya = new AyaReg(item)
         const savedAya = await newAya.save()
         res.status(200).json({ success: true, message: 'Successfully created', data: savedAya })
@@ -85,17 +92,6 @@ exports.createAyaRegEntry = async (req, res) => {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // GET /ayareg/:id - Get an AyaReg entry by ID

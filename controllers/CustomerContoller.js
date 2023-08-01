@@ -83,6 +83,14 @@ exports.createCustomerRegEntry = async (req, res) => {
         if (req.files && req.files.file && req.files.file.length > 0) {
             item = { ...item, ['file']: req.files.file[0].path }
         }
+        // if (req.files && req.files.aadharCardImage && req.files.aadharCardImage.length > 0) {
+        //     item = { ...item, ['aadharCardImage']: req.files.aadharCardImage[0].path};
+        // }
+    
+        // Check if ID Card Images were uploaded
+        if (req.files && req.files.idCardImage && req.files.idCardImage.length > 0) {
+            item = { ...item, ['idCardImage']: req.files.idCardImage[0].path };
+        }
 
         const newCustomer = new CustomerReg(item)
         const savedCustomer = await newCustomer.save()
@@ -164,37 +172,6 @@ exports.getCustomerRegEntryById = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -305,7 +282,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
     }
     
     
-    else if ( req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountReceived || req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
+    else if (req.body.generatedDate || req.body.generatedPaymentMode || req.body.generatedTransactionId ||req.body.generatedUpi ||req.body.generatedTransactionDate || req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountReceived || req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
         updateData.$push = {
             customerGeneratedInvoice: {
                 generatedCustomerId : req.body.generatedCustomerId, 
@@ -319,6 +296,12 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 generatedAmountReceived : req.body.generatedAmountReceived,
                 generatedWorkingDays : req.body.generatedWorkingDays,
                 generatedLeaveTaken : req.body.generatedLeaveTaken,
+                generatedDate : req.body.generatedDate,
+                generatedPaymentMode : req.body.generatedPaymentMode,
+                generatedTransactionId : req.body.generatedTransactionId,
+                generatedUpi : req.body.generatedUpi,
+                generatedTransactionDate : req.body.generatedTransactionDate,
+
             },
         };
     }
@@ -342,6 +325,7 @@ exports.updateCustomerRegEntryById = async (req, res) => {
             totalPendingAmount : req.body.totalPendingAmount
         }
     }
+
 
     try {
         const updatedEntry = await CustomerReg.findByIdAndUpdate(

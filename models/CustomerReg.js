@@ -13,6 +13,9 @@ const customerRegSchema = new mongoose.Schema({
     guardianName: {
         type: String,
     },
+    baseRate :{
+        type : Number,
+    },
     booking: {
         type: String,
 
@@ -95,8 +98,23 @@ const customerRegSchema = new mongoose.Schema({
         generatedCustomerId:{
             type : String,
         },
+        generatedDate : {
+            type : String,
+        },
         generatedTime:{
             type : String
+        },
+        generatedPaymentMode : {
+            type : String
+        },
+        generatedTransactionId:{
+            type : String,
+        },
+        generatedUpi : {
+            type : String,
+        },
+        generatedTransactionDate:{
+            type : String,
         },
         generatedBill:{
             type : Number
@@ -152,6 +170,9 @@ const customerRegSchema = new mongoose.Schema({
     religion: {
         type: String
     },
+    casteCategory:{
+        type : String
+    },
     marriageStatus: {
         type: String,
         // enum: ['Single', 'Married', 'Widow'],
@@ -165,9 +186,20 @@ const customerRegSchema = new mongoose.Schema({
     idCardNumber: {
         type: String
     },
-    idProofImage: {
-        type: String,
+    // idProofImage: {
+    //     type: String,
+    // },
+    idCardImage:{
+        type : String,
+        default : ""
     },
+    // aadharCardNumber:{
+    //     type : String
+    // },
+    // aadharCardImage:{
+    //     type : String,
+    //     default : ""
+    // },
     statusofCustomer: {
         type: String
     },
@@ -179,8 +211,7 @@ const customerRegSchema = new mongoose.Schema({
         default: ""
     },
     assign: {
-        type: String,
-        default: "Not Assign"
+        type: Boolean,
     },
     assignedAyaDetails:[{
         assignedAyaCode : {

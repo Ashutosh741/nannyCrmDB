@@ -26,6 +26,12 @@ var storage = multer.diskStorage({
         if (file.fieldname === "file") {
             cb(null, md5(Date.now()) + "." + mime.getExtension(file.mimetype));
         }
+        if (file.fieldname === "aadharCardImage") {
+            cb(null, md5(Date.now()) + "." + mime.getExtension(file.mimetype));
+        }
+        if (file.fieldname === "idCardImage") {
+            cb(null, md5(Date.now()) + "." + mime.getExtension(file.mimetype));
+        }
 
     },
 });
@@ -38,6 +44,15 @@ const upload = multer({
 
         {
             name: 'file', maxCount: 1
+
+        },
+        {
+            name: 'aadharCardImage', maxCount: 1
+            
+        },
+        {
+            name: 'idCardImage', maxCount: 1
+            
         },
     ]
 );
@@ -71,6 +86,9 @@ router.get('/ayareg/:id', getAyaRegEntryById);
 // PUT /ayareg/:id - Update an AyaReg entry by ID
 router.put('/ayareg/:id', updateAyaRegEntryById);
 
+// router.put('/ayareg/:id/:generatedInvoice[index]', updateAyaRegEntryById);
+
+
 // DELETE /ayareg/:id - Delete an AyaReg entry by ID
 router.delete('/ayareg/:id', deleteAyaRegEntryById);
 
@@ -94,6 +112,9 @@ router.get('/customerreg/:id', getCustomerRegEntryById);
 
 
 router.put('/customerreg/:id', updateCustomerRegEntryById);
+
+// router.put('/customerreg/:id/customerGeneratedInvoice/:id', updateCustomerRegEntryById);
+
 // router.put('/customerreg/:id', updateCustomerRegEntryBy);
 
 

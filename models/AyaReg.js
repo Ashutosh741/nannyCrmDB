@@ -15,7 +15,7 @@ const ayaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    rate :{
+    baseRate :{
         type : Number,
     },
     workShift: {
@@ -151,6 +151,9 @@ const ayaSchema = new mongoose.Schema({
     religion: {
         type: String
     },
+    casteCategory:{
+        type : String
+    },
     marriageStatus: {
         type: String,
         // enum: ['Single', 'Married', 'Widow'],
@@ -164,6 +167,18 @@ const ayaSchema = new mongoose.Schema({
     idCardNumber: {
         type: String
     },
+    idCardImage:{
+        type : String,
+        default : ""
+    },
+    aadharCardNumber:{
+        type : String
+    },
+    aadharCardImage:{
+        type : String,
+        default : ""
+    },
+
     statusAya: {
         type: String,
         // enum: ['Running-Aya', 'Close-Aya', 'Hold-Aya'],
@@ -184,8 +199,8 @@ const ayaSchema = new mongoose.Schema({
         default: ''
     },
     assign: {
-        type: String,
-        default: "Not Assign"
+        type: Boolean,
+        default: "False"
     },
     assignedCustomerDetails:[{
         assignedCustomerCode :{
