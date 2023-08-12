@@ -31,6 +31,9 @@ const customerRegSchema = new mongoose.Schema({
         type: String,
         default: 0
     },
+    workinglocation: {
+        type: String,
+    },
     closingDate: {
         type: String,
 
@@ -211,7 +214,8 @@ const customerRegSchema = new mongoose.Schema({
         default: ""
     },
     assign: {
-        type: Boolean,
+        type: String,
+        
     },
     assignedAyaDetails:[{
         assignedAyaCode : {
@@ -222,8 +226,6 @@ const customerRegSchema = new mongoose.Schema({
         assignedAyaName : {
             type : String,
             default: ''
-
-
         },
         assignedAyaFromDate : {
             type : String,
@@ -251,6 +253,20 @@ const customerRegSchema = new mongoose.Schema({
             default: ''
 
         },
+        replaceAyaDetails : [{
+            replaceAyaCode:{
+                type : String,
+            },
+            replaceAyaName:{
+                type : String,
+            },
+            replaceAyaFromDate:{
+                type : String,
+            },
+            replaceAyaToDate:{
+                type : String,
+            },
+        }],
         createdAt: {
             type: Date,
             default: Date.now,

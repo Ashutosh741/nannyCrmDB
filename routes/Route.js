@@ -1,7 +1,7 @@
 const express = require('express');
-const { getAllAyaRegEntries, createAyaRegEntry, getAyaRegEntryById, updateAyaRegEntryById, deleteAyaRegEntryById } = require('../controllers/AyaController');
+const { getAllAyaRegEntries, createAyaRegEntry,insertReplaceCustomerDetails,updateAssignedDetail,updateAyaBill,updateReplaceCustomerDetails, getAyaRegEntryById, updateAyaRegEntryById, deleteAyaRegEntryById } = require('../controllers/AyaController');
 
-const { getAllCustomerRegEntries, createCustomerRegEntry, updateCustomerRegEntryById, deleteCustomerRegEntryById, getCustomerRegEntryById, getCustomerCode, } = require('../controllers/CustomerContoller');
+const { getAllCustomerRegEntries, updateReplaceAyaDetails,insertReplaceAyaDetails,createCustomerRegEntry,updateCustomerBill, updateCustomerRegEntryById, deleteCustomerRegEntryById, getCustomerRegEntryById, getCustomerCode, } = require('../controllers/CustomerContoller');
 
 const { createBookingEntry, getAllBooking } = require('../controllers/BookController');
 const { login, register } = require('../controllers/authController');
@@ -86,6 +86,21 @@ router.get('/ayareg/:id', getAyaRegEntryById);
 // PUT /ayareg/:id - Update an AyaReg entry by ID
 router.put('/ayareg/:id', updateAyaRegEntryById);
 
+router.put('/updateAyaBill', updateAyaBill);
+
+
+
+router.put('/updateAssignedDetail', updateAssignedDetail);
+
+
+router.post('/insertReplaceCustomerDetails/:ayaId/:index',insertReplaceCustomerDetails);
+
+router.put('/updateReplaceCustomerDetails', updateReplaceCustomerDetails);
+
+// router.put('/updateAssignedDetail', updateAssignedDetail);
+
+
+
 // router.put('/ayareg/:id/:generatedInvoice[index]', updateAyaRegEntryById);
 
 
@@ -95,7 +110,9 @@ router.delete('/ayareg/:id', deleteAyaRegEntryById);
 
 
 
+router.post('/insertReplaceAyaDetails/:customerId/:index',insertReplaceAyaDetails);
 
+router.put('/updateReplaceAyaDetails', updateReplaceAyaDetails);
 
 // customer Registration
 
@@ -113,7 +130,7 @@ router.get('/customerreg/:id', getCustomerRegEntryById);
 
 router.put('/customerreg/:id', updateCustomerRegEntryById);
 
-// router.put('/customerreg/:id/customerGeneratedInvoice/:id', updateCustomerRegEntryById);
+router.put('/updateCustomerBill', updateCustomerBill);
 
 // router.put('/customerreg/:id', updateCustomerRegEntryBy);
 

@@ -199,9 +199,10 @@ const ayaSchema = new mongoose.Schema({
         default: ''
     },
     assign: {
-        type: Boolean,
-        default: "False"
+        type: String,
+        default: false // Set default value as a Boolean
     },
+    
     assignedCustomerDetails:[{
         assignedCustomerCode :{
             type : String,
@@ -243,6 +244,21 @@ const ayaSchema = new mongoose.Schema({
             default: ''
 
         },
+        replaceCustomerDetails: [{
+            replaceCustomerCode: {
+                type: String,
+            },
+            replaceCustomerName: {
+                type: String,
+            },
+            replaceCustomerFromDate: {
+                type: String,
+            },
+            replaceCustomerToDate: {
+                type: String,
+            },
+        }],
+        
         createdAt: {
             type: Date,
             default: Date.now,
