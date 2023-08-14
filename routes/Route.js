@@ -1,7 +1,7 @@
 const express = require('express');
 const { getAllAyaRegEntries, createAyaRegEntry,insertReplaceCustomerDetails,updateAssignedDetail,updateAyaBill,updateReplaceCustomerDetails, getAyaRegEntryById, updateAyaRegEntryById, deleteAyaRegEntryById } = require('../controllers/AyaController');
 
-const { getAllCustomerRegEntries, updateReplaceAyaDetails,insertReplaceAyaDetails,createCustomerRegEntry,updateCustomerBill, updateCustomerRegEntryById, deleteCustomerRegEntryById, getCustomerRegEntryById, getCustomerCode, } = require('../controllers/CustomerContoller');
+const { getAllCustomerRegEntries,deleteBill, updateReplaceAyaDetails,insertReplaceAyaDetails,createCustomerRegEntry,updateCustomerBill, updateCustomerRegEntryById, deleteCustomerRegEntryById, getCustomerRegEntryById, getCustomerCode, } = require('../controllers/CustomerContoller');
 
 const { createBookingEntry, getAllBooking } = require('../controllers/BookController');
 const { login, register } = require('../controllers/authController');
@@ -107,8 +107,13 @@ router.put('/updateReplaceCustomerDetails', updateReplaceCustomerDetails);
 // DELETE /ayareg/:id - Delete an AyaReg entry by ID
 router.delete('/ayareg/:id', deleteAyaRegEntryById);
 
+// ---------------- CUSTOMER ROUTES  ----------------------
 
+// to delte the generated bill at particular index
 
+router.delete('/deleteBill/:customerId/:index', deleteBill);
+
+// for replacement of assigned aya in customer
 
 router.post('/insertReplaceAyaDetails/:customerId/:index',insertReplaceAyaDetails);
 

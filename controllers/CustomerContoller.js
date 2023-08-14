@@ -502,8 +502,12 @@ exports.updateCustomerRegEntryById = async (req, res) => {
     }
 }
 
+// operation on replaced assigned aya 
 
 exports.insertReplaceAyaDetails = async function (req, res) {
+    // console.log('req.body',req.body.replaceAyaDetails);
+    // console.log('usomerr id',req.params.customerId);
+    // console.log('index',req.params.index);
     try {
         const customerId = req.params.customerId;
         const index = req.params.index;
@@ -571,6 +575,36 @@ exports.updateReplaceAyaDetails = async function (req, res) {
     res.status(500).send({ status: 'Failed', message: error.message });
   }
 };
+
+// operation on generated Bill
+
+exports.deleteBill = async(req,res)=>{
+    try{
+        const customerId = req.params.customerId;
+        const index = parseInt(req.params.index);
+        
+        // fetch the customer data ;
+
+        const customer =  await CustomerReg.findById(customerId);
+
+        if(!customer){
+            return res.status(404).json({status : "Failed" , message : "Customer not found in db."})
+        }
+
+        if(index < 0 || index >= customer.customerGeneratedInvoice.length){
+            return res.status(404).json({status : "Failed", message : "index not found or Invalid Index" })
+        }
+
+        customer.customerGeneratedInvoice.splice(index,1);
+
+        await customer.save();
+
+        res.status(200).json({ status : "Success",message:"Bill deleted Successfully"})
+
+    } catch(err){
+        res.status(500).json({ status : "Failed", message : err.message})
+    }
+}
 
 
 

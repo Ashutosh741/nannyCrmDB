@@ -192,7 +192,7 @@ const ayaSchema = new mongoose.Schema({
     },
     workinglocation: {
         type: String,
-    },
+    },  
     ayaCanSpeak: {
         type: String,
         // enum: ['Hindi', 'Bengali', 'English'],
