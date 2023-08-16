@@ -578,7 +578,7 @@ exports.updateReplaceAyaDetails = async function (req, res) {
 
 // operation on generated Bill
 
-exports.deleteBill = async(req,res)=>{
+exports.deleteCustomerBill = async(req,res)=>{
     try{
         const customerId = req.params.customerId;
         const index = parseInt(req.params.index);

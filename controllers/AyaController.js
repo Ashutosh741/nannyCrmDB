@@ -548,3 +548,32 @@ exports.deleteAyaRegEntryById = async (req, res) => {
     }
 };
 
+
+
+exports.deleteAyaBill = async(req,res)=>{
+    try{
+        const AyaId = req.params.ayaId;
+        const index = parseInt(req.params.index);
+        
+        // fetch the aya data ;
+
+        const Aya =  await AyaReg.findById(AyaId);
+
+        if(!Aya){
+            return res.status(404).json({status : "Failed" , message : "Aya not found in db."})
+        }
+
+        if(index < 0 || index >= Aya.ayaGeneratedInvoice.length){
+            return res.status(404).json({status : "Failed", message : "index not found or Invalid Index" })
+        }
+
+        Aya.ayaGeneratedInvoice.splice(index,1);
+
+        await Aya.save();
+
+        res.status(200).json({ status : "Success",message:"Bill deleted Successfully"})
+
+    } catch(err){
+        res.status(500).json({ status : "Failed", message : err.message})
+    }
+}
