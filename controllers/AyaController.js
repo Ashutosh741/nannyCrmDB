@@ -366,7 +366,7 @@ exports.updateAyaRegEntryById = async (req, res) => {
             },
         };
     }
-    else if(req.body.replaceCustomerToDate || req.body.replaceCustomerFromDate || req.body.replaceCustomerCode || req.body.assignedCustomerPurpose || req.body.assignedCustomerShift || req.body.assignedCustomerRate || req.body.assignedCustomerReason ||  req.body.assignedCustomerToDate || req.body.assignedCustomerFromDate || req.body.assignedCustomerName || req.body.assignedCustomerCode){
+    else if(req.body.assignedCustomerPurpose || req.body.assignedCustomerShift || req.body.assignedCustomerRate || req.body.assignedCustomerReason ||  req.body.assignedCustomerToDate || req.body.assignedCustomerFromDate || req.body.assignedCustomerName || req.body.assignedCustomerCode){
         updateData.$push = {
         assignedCustomerDetails:{
             assignedCustomerCode : req.body.assignedCustomerCode,
@@ -377,11 +377,6 @@ exports.updateAyaRegEntryById = async (req, res) => {
             assignedCustomerRate  : req.body.assignedCustomerRate, 
             assignedCustomerShift : req.body.assignedCustomerShift, 
             assignedCustomerPurpose : req.body.assignedCustomerPurpose, 
-            replaceCustomerDetails : {  
-                replaceCustomerCode:req.body.replaceCustomerCode,
-                replaceCustomerFromDate: req.body.replaceCustomerFromDate,
-                replaceCustomerToDate: req.body.replaceCustomerToDate,
-            },
         },
         }
     }

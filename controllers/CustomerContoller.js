@@ -444,11 +444,6 @@ exports.updateCustomerRegEntryById = async (req, res) => {
                 assignedAyaRate  : req.body.assignedAyaRate, 
                 assignedAyaShift : req.body.assignedAyaShift, 
                 assignedAyaPurpose : req.body.assignedAyaPurpose, 
-                replaceAyaDetails : {
-                    replaceAyaCode:req.body.replaceAyaCode,
-                    replaceAyaFromDate: req.body.replaceAyaFromDate,
-                    replaceAyaToDate: req.body.replaceAyaToDate,
-                },
             },
             }
         }

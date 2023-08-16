@@ -108,14 +108,14 @@ router.put('/updateReplaceCustomerDetails', updateReplaceCustomerDetails);
 router.delete('/ayareg/:id', deleteAyaRegEntryById);
 
 
-router.delete('/deleteBill/:ayaId/:index', deleteAyaBill);
+router.delete('/deleteAyaBill/:ayaId/:index', deleteAyaBill);
 
 
 // ---------------- CUSTOMER ROUTES  ----------------------
 
 // to delte the generated bill at particular index
 
-router.delete('/deleteBill/:customerId/:index', deleteCustomerBill);
+router.delete('/deleteCustomerBill/:customerId/:index', deleteCustomerBill);
 
 // for replacement of assigned aya in customer
 
