@@ -409,9 +409,10 @@ exports.updateCustomerRegEntryById = async (req, res) => {
         }
         
         
-        else if (req.body.generatedDate || req.body.generatedPaymentMode || req.body.generatedTransactionId ||req.body.generatedUpi ||req.body.generatedTransactionDate || req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountReceived || req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
+        else if (req.body.generatedSerialNo || req.body.generatedDate || req.body.generatedPaymentMode || req.body.generatedTransactionId ||req.body.generatedUpi ||req.body.generatedTransactionDate || req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountReceived || req.body.generatedAyaPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedCustomerId) {
             updateData.$push = {
                 customerGeneratedInvoice: {
+                    // generatedSerialNo : req.body.generatedSerialNo,
                     generatedCustomerId : req.body.generatedCustomerId, 
                     generatedTime : req.body.generatedTime,
                     generatedBill: req.body.generatedBill,

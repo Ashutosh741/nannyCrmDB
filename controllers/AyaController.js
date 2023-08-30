@@ -380,9 +380,10 @@ exports.updateAyaRegEntryById = async (req, res) => {
         },
         }
     }
-    else if (req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountPaid || req.body.generatedCustomerPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedAyaId) {
+    else if (req.body.generatedSerialNo ||req.body.generatedLeaveTaken || req.body.generatedWorkingDays || req.body.generatedAmountPaid || req.body.generatedCustomerPurpose || req.body.generatedBill || req.body.generatedTime || req.body.generatedToDate || req.body.generatedFromDate || req.body.generatedRate || req.body.generatedAyaId) {
         updateData.$push = {
-            ayaGeneratedInvoice: {
+            ayaGeneratedInvoice: { 
+                // generatedSerialNo : req.body.generatedSerialNo,
                 generatedAyaId : req.body.generatedAyaId, 
                 generatedTime : req.body.generatedTime,
                 generatedBill: req.body.generatedBill,

@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 
 
-const ayaSchema = new mongoose.Schema({
+const ayaSchema = new mongoose.Schema(
+    // {
+    //     serialNo:{
+    //         type : String,
+    //     },
+    // },
+    {
     ayaCode: {
         type: String,
 
@@ -85,7 +91,13 @@ const ayaSchema = new mongoose.Schema({
         // enum: ['Male', 'Female'],
         default: ''
     },
+    serialNo:{
+        type : String,
+    },
     ayaGeneratedInvoice : [{
+        generatedSerialNo:{
+            type : String,
+        },
         generatedAyaId:{
             type : String,
             default: ''

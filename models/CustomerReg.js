@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
 
-const customerRegSchema = new mongoose.Schema({
+const customerRegSchema = new mongoose.Schema(
+    // {
+    //     serialNo:{
+    //         type : String,
+    //     },
+    // },
+    {
     customerCode: {
         type: String,
 
@@ -97,7 +103,11 @@ const customerRegSchema = new mongoose.Schema({
         // enum: ['Male', 'Female'],
         default: ''
     },
+
     customerGeneratedInvoice : [{
+        generatedSerialNo:{
+            type : String,
+        },
         generatedCustomerId:{
             type : String,
         },
