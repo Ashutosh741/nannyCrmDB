@@ -72,39 +72,6 @@ app.use(session({
     resave: false
 }));
 
-const customerBills = [
-    { timestamp: 1631194200000, amount: 200 },
-    { timestamp: 1631280600000, amount: 180 },
-  ];
-  
-  const ayaPayments = [
-    { timestamp: 1631194200000, amount: 46 },
-    { timestamp: 1631280600000, amount: 30 },
-  ];
-
-
-  const calculateProfit = () => {
-    const profitData = [];
-  
-    for (let i = 0; i < customerBills.length; i++) {
-      const bill = customerBills[i];
-      const payment = ayaPayments.find((payment) => payment.timestamp === bill.timestamp);
-  
-      if (payment) {
-        const profit = bill.amount - payment.amount;
-        profitData.push([bill.timestamp, profit]);
-      }
-    }
-  
-    return profitData;
-  };
-
-  // API endpoint to get profit data
-app.get('/api/profit', (req, res) => {
-    const profitData = calculateProfit();
-    res.json(profitData);
-  });
-  
 
 
 

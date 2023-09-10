@@ -1,20 +1,13 @@
 const mongoose = require('mongoose')
 
 const customerRegSchema = new mongoose.Schema(
-    // {
-    //     serialNo:{
-    //         type : String,
-    //     },
-    // },
     {
     customerCode: {
         type: String,
-
         unique: true
     },
     name: {
         type: String,
-
     },
     guardianName: {
         type: String,
@@ -98,6 +91,65 @@ const customerRegSchema = new mongoose.Schema(
     dateOfBirth: {
         type: Date,
     },
+    patientGender : {
+        type : String,
+    },
+    patientName : {
+        type :  String,
+    },
+    patientFather : {
+        type : String,
+    },
+    patientAddress:{
+        type : String,
+    },
+
+    patientNumber:{
+        type :  String,
+    },
+    patientDOB : {
+        type :  String,
+    },
+    patientCategory:{
+        type : String,
+    },
+    patientService:{
+        type :  String,
+    },
+    childName : {
+        type : String,
+    },
+    childMother:{
+        type : String,
+    },
+    childAddress:{
+        type : String,
+    },
+    childNumber:{
+        type :  String,
+    },
+    childDOB:{
+        type : String,
+    },
+    childCategory:{
+        type : String,
+    },
+    childService:{
+        type : String,
+    },
+    totalPerson:{
+        type : String,
+    },
+    dayTiming:{
+        type : String,
+    },
+    nightTiming:{
+        type : String,
+    },
+    totalRoom:{
+        type : String,
+    },
+
     gender: {
         type: String,
         // enum: ['Male', 'Female'],
